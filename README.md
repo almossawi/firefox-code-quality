@@ -3,14 +3,25 @@ Architectural measures of complexity for revisions in mozilla-central.
 
 The repository includes the now fully-automated workflow for unning the code-quality analyses on revisions in mozilla-central.  More documentation to follow.
 
+### Quick-start guide
+
 To run the complete analysis on the latest revision in mozilla-central, run the following command
 
 ```
 analyzeMozillaCentral.sh 
 ```
 
+### Directory structure
+
 The script takes approximately one hour to complete. Metrics are written to the directory ``metrics_out``:
 
 * full_metrics.csv: includes the entire set of metrics for all processed revisions.
 * loc_mccabe_metrics.csv: lines of code and cyclomatic complexity metrics for the last processed revision.
 * dependency_metrics.csv: includes metrics for direct dependencies, propagation and highly interconnected files for the last processed revision.
+
+### Requirements
+
+* Scitools' Understand
+* MATLAB
+* Perl
+* Python
