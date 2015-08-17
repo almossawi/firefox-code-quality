@@ -25,3 +25,6 @@ The script takes approximately one hour to complete. Metrics are written to the 
 * MATLAB
 * Perl
 * Python
+
+### Demo
+[https://metrics.mozilla.com/code-quality](https://metrics.mozilla.com/code-quality)
