@@ -1,11 +1,11 @@
 # Firefox Code Quality
 Architectural measures of complexity for revisions in mozilla-central.
 
-The repository includes the now fully-automated workflow for unning the code-quality analyses on revisions in mozilla-central.  More documentation to follow.
+The repository includes the now fully-automated workflow for running the code-quality analyses on revisions in mozilla-central.  More documentation to follow.
 
 ### Quick-start guide
 
-To run the complete analysis on the latest revision in mozilla-central, run the following command
+To run the complete set of analyses on the latest revision in mozilla-central, run the following command
 
 ```
 analyzeMozillaCentral.sh 
