@@ -8,12 +8,12 @@ rm -rf understand_in/*
 python getLatestSource.py
 
 #get loc, mccabe and export dependencies
-rm currentNightly.udb
+rm currentBuild.udb
 
-und create -db currentNightly.udb -languages c++ Web add -exclude ".*,*test*" understand_in/
-und analyze -db currentNightly.udb
-uperl projectMetrics.pl -db currentNightly.udb > metrics_out/loc_mccabe_metrics.csv
-und export -dependencies file csv perl_in/dependencies.csv -db currentNightly.udb
+und create -db currentBuild.udb -languages c++ Web add -exclude ".*,*test*" understand_in/
+und analyze -db currentBuild.udb
+uperl projectMetrics.pl -db currentBuild.udb > metrics_out/loc_mccabe_metrics.csv
+und export -dependencies file csv perl_in/dependencies.csv -db currentBuild.udb
 
 #process dependencies
 ./extractFilesAndDeps.pl perl_in/dependencies.csv
