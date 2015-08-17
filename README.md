@@ -22,8 +22,8 @@ The script takes approximately one hour to complete. Metrics are written to the 
 ### Requirements
 
 * Scitools' Understand
-* MATLAB
-* Perl
+* MATLAB (to be replaced by Python)
+* Perl (to be replaced by Python)
 * Python
 
 ### Demo
