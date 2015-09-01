@@ -24,10 +24,17 @@
              d.dependencies_per_10k = d.first_order_density * d.files;
         });
 
+
+        var loc_min = d3.min(data, function(d) { return d.CountLineCode; });
+        loc_min -=  loc_min * 0.0001;
+        var loc_max = d3.max(data, function(d) { return d.CountLineCode; });
+
         MG.data_graphic({
             title: "Lines of code",
             description: "LOC measures the number executable lines of code in each revision, ignoring comments and blank lines. LOC and defect density have an inverse relationship due to architecture not changing at the same rate as LOC and architectural elements such as interfaces having a higher propensity for defects than individual components. <b>Lower is better.</b>",
             data: data,
+            min_y: loc_min,
+            max_y: loc_max,
             width: trunk.width,
             height: trunk.height,
             xax_count: trunk.xax_count,
@@ -41,10 +48,18 @@
             mouseover: mouseover()
         });
 
+
+        var mccabe_min = d3.min(data, function(d) { return d.mccabe; });
+        mccabe_min -=  mccabe_min * 0.001;
+        var mccabe_max = d3.max(data, function(d) { return d.mccabe; });
+        mccabe_max +=  mccabe_max * 0.001;
+
         MG.data_graphic({
             title: "Cyclomatic complexity",
             description: "Cyclomatic complexity measures the number of linearly independent paths within a software system and can be applied either to the entire system or to a particular class or function. In our measure of cyclomatic complexity, we control for size and hence, the value for each revision is per 1,000 LOC. <b>Lower is better.</b>",
             data: data,
+            min_y: mccabe_min,
+            max_y: mccabe_max,
             width: trunk.width,
             height: trunk.height,
             xax_count: trunk.xax_count,
@@ -111,10 +126,16 @@
             mouseover: mouseover()
         });
 
+        var files_min = d3.min(data, function(d) { return d.files; });
+        files_min -=  files_min * 0.001;
+        var files_max = d3.max(data, function(d) { return d.files; });
+
         MG.data_graphic({
             title: "Files",
             description: "The number of files in the revision that match our filter, minus tests. The current filter is: <i>.c, .C, .cc, .cpp, .css, .cxx, .h, .H, .hh, .hpp, .htm, .html, .hxx, .inl, .java, .js, .jsm, .py, .s, .xml</i>. <b>Lower is better.</b>",
             data: data,
+            min_y: files_min,
+            max_y: files_max,
             width: trunk.width,
             height: trunk.height,
             xax_count: trunk.xax_count,
