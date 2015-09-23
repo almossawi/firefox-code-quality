@@ -13,6 +13,7 @@
 
     var mouseover = function() {
         return function(d, i) {
+            global.activeRevision = d.revision;
             d3.select('.revision-data')
                 .html('Revision <a target="_blank" href="https://hg.mozilla.org/mozilla-central/rev/' + d.revision + '">' + d.revision + '</a> analyzed on ' + d.date);
         };
@@ -172,20 +173,12 @@
             });
 
             //keep track of mouseouts
-            var mouseouts = d3.select('.mg-rollover-rect rect').on('mouseout');
+            var mouseouts = d3.selectAll('.mg-rollover-rect rect').on('mouseout');
 
             //did we click to lock?
             d3.selectAll('.mg-rollover-rect rect')
                 .on('click', function(d) {
-                    d3.selectAll('.mg-rollover-rect rect').style('display', 'none');        
-                    d3.selectAll('.mg-rollover-rect rect').on('mouseout', null);
-                });
-
-            //did we click to unlock?
-            d3.selectAll('svg path.mg-main-area')
-                .on('click', function(d) {
-                    d3.selectAll('.mg-rollover-rect rect').style('display', 'inline');
-                    d3.selectAll('.mg-rollover-rect rect').on('mouseout', mouseouts);
+                    window.open('https://hg.mozilla.org/mozilla-central/rev/' + global.activeRevision, '_blank');
                 });
         });
     }
