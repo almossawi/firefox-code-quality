@@ -1,0 +1,3 @@
+date,revision,files,first_order_density,prop_cost,core_size,periphery_size,shared_size,control_size,vfo_median,vfi_median,fo_median,fi_median,SumCyclomatic,CountLine,CountLineCode
+2015-09-22T15:05:19Z,a1ccea59e254,517,0.018392,0.33212,225,145,25,17,259,338,27,3,18300,290496,170765
+2015-09-22T23:00:53Z,19b4265d0d56,517,0.018759,0.2949,208,159,18,19,230,336,27,2,18312,290768,170874

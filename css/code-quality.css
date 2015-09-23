@@ -26,18 +26,30 @@ p {
     font-size: 1.3rem;
 }
 
+a,
+a:active,
+a:visited {
+    color: #70b6f1;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #70b6f1;
+}
+
 a.active {
-    background-color: steelblue;
+    background-color: #70b6f1;
     border: 0;
-    border-radius: 4px;
+    border-radius: 24px;
     color: #fff;
-    padding: 5px;
+    padding: 2px 8px 2px 8px;
+    text-decoration: none;
 }
 
 .footer {
     border-top: 0;
     font-size: 0.9rem;
-    padding: 50px 0 0 0;
+    padding: 30px 0 0 0;
 }
 
 h1 {
@@ -62,7 +74,59 @@ h1 {
     }
 }
 
-.divider {
+.hr {
     border-bottom: 1px solid #3b3b3b;
-    height: 10px;
+    height: 24px;
+    margin: 20px 0 10px 0;
+}
+
+.buttons {
+    position: absolute;
+    right: -10px;
+}
+
+.btn-group {
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding-bottom: 15px;
+}
+
+.btn-group span.which-button {
+    font-weight: 300;
+    color: darkgray;
+}
+
+.btn-group span.title {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+ul.switch {
+    border-bottom: 1px solid #3b3b3b;
+    border-top: 1px solid #3b3b3b;
+    clear: both;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding: 17px 0 17px 0;
+}
+
+ul.switch li {
+    display: inline;
+    list-style: none;
+    padding-right: 15px;
+}
+
+ul.switch li.no-padding {
+    padding: 0;
+}
+
+.pill {
+    font-family: 'Open Sans', serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.pill:hover {
+    text-decoration: none;
 }
