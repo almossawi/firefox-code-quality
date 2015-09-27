@@ -61,11 +61,14 @@
                  d.dependencies_per_10k = d.first_order_density * d.files;
             });
 
-            var loc_min = d3.min(data, function(d) { return d.CountLineCode; });
+            var loc_min = d3.min(data, function(d) { return +d.CountLineCode; });
             loc_min -=  loc_min * 0.01;
-            var loc_max = d3.max(data, function(d) { return d.CountLineCode; });
+            var loc_max = d3.max(data, function(d) { return +d.CountLineCode; });
+            loc_max += loc_max * 0.01;
 
             MG.data_graphic({
+                min_y: loc_min,
+                max_y: loc_max,
                 title: "Lines of code",
                 description: "LOC measures the number executable lines of code in each revision, ignoring comments and blank lines. LOC and defect density have an inverse relationship due to architecture not changing at the same rate as LOC and architectural elements such as interfaces having a higher propensity for defects than individual components. <b>Lower is better.</b>",
                 data: data,
@@ -78,17 +81,20 @@
                 x_accessor: 'date',
                 y_accessor: 'CountLineCode',
                 linked: true,
+                interpolate: 'basic',
                 mouseover: mouseover()
             });
 
-            var mccabe_min = d3.min(data, function(d) { return d.mccabe; });
-            mccabe_min -=  mccabe_min * 0.008;
-            var mccabe_max = d3.max(data, function(d) { return d.mccabe; });
-            mccabe_max +=  mccabe_max * 0.008;
+            var mccabe_min = d3.min(data, function(d) { return +d.mccabe; });
+            mccabe_min -=  mccabe_min * 0.01;
+            var mccabe_max = d3.max(data, function(d) { return +d.mccabe; });
+            mccabe_max +=  mccabe_max * 0.01;
 
             MG.data_graphic({
+                min_y: mccabe_min,
+                max_y: mccabe_max,
                 title: "Cyclomatic complexity",
-                description: "Cyclomatic complexity measures the number of linearly independent paths within a software system and can be applied either to the entire system or to a particular class or function. In our measure of cyclomatic complexity, we control for size and hence, the value for each revision is per 1,000 LOC. <br /><a href='https://en.wikipedia.org/wiki/Cyclomatic_complexity'>Read more</a>. <b>Lower is better.</b>",
+                description: "Cyclomatic complexity measures the number of linearly independent paths within a software system, or within a function or class. Here, the measure is the total number of independent paths divided by the total number of lines of code, per 1,000 LOC. So a cyclomatic complexity value of 200, means that there are around 200 independent paths in every 1,000 lines of code.<br /><a href='https://en.wikipedia.org/wiki/Cyclomatic_complexity' target='_blank'>Read more</a>. <b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,
@@ -99,12 +105,13 @@
                 x_accessor: 'date',
                 y_accessor: 'mccabe',
                 linked: true,
+                interpolate: 'basic',
                 mouseover: mouseover()
             });
 
             MG.data_graphic({
                 title: "Dependencies",
-                description: "First-order density measures the number of direct dependencies between files. Here, we show dependencies as the number of files that a randomly chosen file can directly impact. Per the static analysis tool's <a href='http://scitools.com/documents/manuals/pdf/understand.pdf'>manual</a>, 'an item depends on another if it includes, calls, sets, uses, casts, or refers to that item.' <b>Lower is better.</b>",
+                description: "First-order density measures the number of direct dependencies between files. Here, we show dependencies as the number of files that a randomly chosen file can directly impact. Per the static analysis tool's <a href='http://scitools.com/documents/manuals/pdf/understand.pdf' target='_blank'>manual</a>, 'an item depends on another if it includes, calls, sets, uses, casts, or refers to that item.' <b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,
@@ -115,12 +122,13 @@
                 x_accessor: 'date',
                 y_accessor: 'dependencies_per_10k',
                 linked: true,
+                interpolate: 'basic',
                 mouseover: mouseover()
             });
 
             MG.data_graphic({
                 title: "Propagation",
-                description: "Propagation measures direct as well as indirect dependencies between files in a codebase. In practical terms, it gives a sense of the actual reach of a change to a randomly chosen file. We calculate the propagation for each file through a process of matrix multiplication&mdash;see <a href='http://almossawi.com/firefox/prose'>this</a> and <a href='http://www.hbs.edu/faculty/Publication%20Files/05-016.pdf'>this</a>. <br /><b>Lower is better.</b>",
+                description: "Propagation measures direct as well as indirect dependencies between files in a codebase. In practical terms, it gives a sense of the actual reach of a change to a randomly chosen file. We calculate the propagation for each file through a process of matrix multiplication&mdash;see <a href='http://almossawi.com/firefox/prose' target='_blank'>this</a> and <a href='http://www.hbs.edu/faculty/Publication%20Files/05-016.pdf' target='_blank'>this</a>. <br /><b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,
@@ -132,12 +140,13 @@
                 x_accessor: 'date',
                 y_accessor: 'prop_cost',
                 linked: true,
+                interpolate: 'basic',
                 mouseover: mouseover()
             });
 
             MG.data_graphic({
                 title: "Highly interconnected files",
-                description: "Highly interconnected files are files that are interconnected via a chain of cyclic dependencies. These are files that have a fan-out that's higher than the median fan-out in the revision and a fan-in that's higher than the median fan-in in the revision. Highly interconnected files are naturally correlated with propagation, but provide alternative ways of looking at complexity. For more, see <a href='http://almossawi.com/firefox/prose/'>this</a>. <b>Lower is better.</b>",
+                description: "Highly interconnected files are files that are interconnected via a chain of cyclic dependencies. These are files that have a fan-out that's higher than the median fan-out in the revision and a fan-in that's higher than the median fan-in in the revision. Highly interconnected files are naturally correlated with propagation, but provide alternative ways of looking at complexity. For more, see <a href='http://almossawi.com/firefox/prose/' target='_blank'>this</a>. <b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,
@@ -149,16 +158,20 @@
                 x_accessor: 'date',
                 y_accessor: 'core',
                 linked: true,
+                interpolate: 'basic',
                 mouseover: mouseover()
             });
 
-            var files_min = d3.min(data, function(d) { return d.files; });
+            var files_min = d3.min(data, function(d) { return +d.files; });
             files_min -=  files_min * 0.01;
-            var files_max = +d3.max(data, function(d) { return d.files; }) + 10;
+            var files_max = d3.max(data, function(d) { return +d.files; });
+            files_max +=  files_max * 0.01;
 
             MG.data_graphic({
+                min_y: Math.floor(files_min),
+                max_y: Math.ceil(files_max),
                 title: "Files",
-                description: "The number of files in the revision that match our <a href='data/filter.txt'>set of filters</a>, minus tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
+                description: "The number of files in the revision that match our <a href='data/filter.txt' target='_blank'>set of filters</a>, minus tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,
@@ -169,6 +182,7 @@
                 x_accessor: 'date',
                 y_accessor: 'files',
                 linked: true,
+                interpolate: 'basic',
                 mouseover: mouseover()
             });
 
