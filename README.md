@@ -5,7 +5,7 @@ The repository includes the now fully-automated workflow for running the code-qu
 
 ### Quick-start guide
 
-To run the complete set of analyses on the latest revision in mozilla-central, run this script
+To run the complete set of analyses on the latest revision in mozilla-central and update the interface, run the following script:
 
 ```
 scripts/analyzeMozillaCentral.sh 
