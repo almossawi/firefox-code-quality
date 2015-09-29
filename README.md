@@ -23,15 +23,9 @@ The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to comp
 2. Performs static analysis on the codebase to get LOC, cyclomatic complexity and dependency data (``projectMetrics.pl``)
 3. Generates a hash table from the dependency data (``extractFilesAndDeps.pl``)
 4. Gets dependencies, propagation cost and highly-interconnected files data (``main_metrics_generator.m``)
-5. Writes the entire set of data to be graphed to ``data/full_metrics-all.csv`` (``addToFullMetrics.py``)
+5. Writes the entire set of data to be graphed to ``metrics_out/full_metrics-all.csv`` (``addToFullMetrics.py``)
 
 The script then goes through the above steps for each of the modules in ``data/modules.txt``.
-
-Metrics are written to the directory ``metrics_out``, which includes the following files
-
-* full_metrics-all.csv: includes the entire set of metrics for all processed revisions.
-* loc_mccabe_metrics.csv: lines of code and cyclomatic complexity metrics for the last processed revision.
-* dependency_metrics.csv: includes metrics for direct dependencies, propagation and highly interconnected files for the last processed revision.
 
 ### Dependencies endpoint
 
