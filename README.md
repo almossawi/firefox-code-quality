@@ -33,7 +33,7 @@ To get the set of files that depend on some arbitrary file in the latest revisio
 
 ``https://metrics.mozilla.com/code-quality/dep/?filename=xpcom/glue/nsINIParser.cpp&download=false``
 
-The response is a JSON file like this:
+The response is a JSON object like this:
 
 ```javascript
 {
