@@ -12,9 +12,9 @@ analyzeMozillaCentral.sh
 ```
 
 ### Modifying things
-* data/modules.txt: contains the set of directories that constitute modules (the current ones may not be accurate)
-* data/filter.txt: contains the set of files and directories that we omit from the analysis
-* getLatestSource.py: contains the path to the codebase that we'll be analyzing
+* ``data/modules.txt``: contains the set of directories that constitute modules (the current ones may not be accurate)
+* ``data/filter.txt``: contains the set of files and directories that we omit from the analysis
+* ``getLatestSource.py``: contains the path to the codebase that we'll be analyzing
 
 ### How the script works
 The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to complete. It performs the following tasks:
