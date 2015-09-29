@@ -19,7 +19,7 @@
         };
     }
     
-    d3.text('data/modules.txt', function(data) {
+    d3.text('scripts/data/modules.txt', function(data) {
         data.split('\n').forEach(function(module) {
             d3.select('.switch')
                 .append('li')
@@ -53,7 +53,7 @@
     function drawCharts(module) {
         if(module == undefined) { module = 'all'; }
 
-        d3.csv('data/full_metrics-' + module + '.csv', function(data) {
+        d3.csv('metrics_out/full_metrics-' + module + '.csv', function(data) {
             data = MG.convert.date(data, 'date', '%Y-%m-%dT%H:%M:%SZ');
             data.map(function(d) {
                  d.mccabe = d.SumCyclomatic / d.CountLineCode * 1000;
@@ -171,7 +171,7 @@
                 min_y: Math.floor(files_min),
                 max_y: Math.ceil(files_max),
                 title: "Files",
-                description: "The number of files in the revision that match our <a href='data/filter.txt' target='_blank'>set of filters</a>, minus tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
+                description: "The number of files in the revision that match our <a href='scripts/data/filter.txt' target='_blank'>set of filters</a>, minus tests and forked code, which currently includes <i>ipc/chromium</i>. <b>Lower is better.</b>",
                 data: data,
                 width: global.trunk.width,
                 height: global.trunk.height,

@@ -2,31 +2,62 @@
 
 cd ~/Desktop/matlab_scripts_firefox_nightly
 
-#get latest source
-rm -rf understand_in/*
-rm -rf understand_in/*
-python getLatestSource.py
+#get latest source, we can pass in dont_pull to use existing codebase instead of pulling latest
+if [ "$1" != "dont_pull" ]
+then
+  rm -rf understand_in/*
+  rm -rf understand_in/*
+  python getLatestSource.py
 
-#get loc, mccabe and export dependencies
-rm currentBuild.udb
+  rm currentBuild-*.udb
+fi
 
-und create -db currentBuild.udb -languages c++ Web add -exclude ".*,*test*" understand_in/
-und analyze -db currentBuild.udb
-uperl projectMetrics.pl -db currentBuild.udb > metrics_out/loc_mccabe_metrics.csv
-und export -dependencies file csv perl_in/dependencies.csv -db currentBuild.udb
+#get path (eg. understand_in/mozilla-central-a1ccea59e254)
+REVISION=()
+for FILE in understand_in/*; do
+  [[ -d $FILE ]] && REVISION+=("$FILE")
+done
 
-#process dependencies
-./extractFilesAndDeps.pl perl_in/dependencies.csv
+#remove filtered files and directories (third-party code)
+while IFS='' read -r line || [[ -n "$line" ]]; do
+  echo './'$REVISION'/'$line
+  #und remove $REVISION'/'$line -db currentBuild.udb
+  #removing files is faster and more reliable than und remove
+  rm -rf './'$REVISION'/'$line
+done < 'data/filter.txt'
 
-#cleanup
-rm -rf misc/dependencies.csv.files
-rm -rf matlab_in/dependencies.csv.deps
+analyzeModule() {
+  MOD=$1
+  DB_NAME=currentBuild'-'$MOD.udb
 
-mv perl_in/dependencies.csv.files misc
-mv perl_in/dependencies.csv.deps matlab_in
+  #get loc, mccabe and export dependencies
+  und create -db $DB_NAME -languages c++ Web add -exclude ".*,*test*" $REVISION'/'$MOD
+  echo $REVISION'/'$MOD
+  und analyze -db $DB_NAME
+  uperl projectMetrics.pl -db $DB_NAME > metrics_out/loc_mccabe_metrics.csv
+  und export -dependencies file csv perl_in/dependencies.csv -db $DB_NAME
 
-#get architectural metrics
-matlab -nodesktop -r main_metrics_generator
+  #process dependencies
+  ./extractFilesAndDeps.pl perl_in/dependencies.csv
 
-#add date and revision number to full_metrics.csv and then data from the other two metrics_out files
-python addToFullMetrics.py
+  #cleanup
+  rm -rf misc/dependencies.csv.files
+  rm -rf matlab_in/dependencies.csv.deps
+  mv perl_in/dependencies.csv.files misc
+  mv perl_in/dependencies.csv.deps matlab_in
+
+  #get architectural metrics
+  matlab -nodesktop -r main_metrics_generator
+
+  #add date and revision number to full_metrics.csv and then data from the other two metrics_out files
+  python addToFullMetrics.py $MOD
+}
+
+#analyze modules
+while IFS='' read -r line || [[ -n "$line" ]]; do
+  echo $line
+  analyzeModule $line
+done < 'data/modules.txt'
+
+#analyze codebase (no param = entire codebase)
+analyzeModule

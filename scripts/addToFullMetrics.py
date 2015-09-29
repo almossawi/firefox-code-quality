@@ -22,7 +22,11 @@ dependency_lines = [line.rstrip('\n') for line in open('metrics_out/dependency_m
 matlab_metrics = dependency_lines[1].split(",")
 
 #append to full_metrics.csv
-with open('metrics_out/full_metrics.csv', 'a') as metrics_out:
+module = 'all'
+if len(sys.argv) > 1:
+  module = sys.argv[1] 
+  
+with open('metrics_out/full_metrics-' + module + '.csv', 'a') as metrics_out:
     metrics_out.write('\n' + analysis_datetime + ',' + revision + ',' 
         + matlab_metrics[1] + ',' 
         + matlab_metrics[2] + ',' 
