@@ -112,7 +112,7 @@ ul.switch {
 }
 
 ul.switch li {
-    display: inline;
+    display: inline-block;
     list-style: none;
     padding-right: 15px;
 }

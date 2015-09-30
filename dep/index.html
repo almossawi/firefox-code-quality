@@ -28,8 +28,8 @@
     if(!QueryString.filename) {
         error();
     } else {
-        d3.text('../matlab_in/dependencies.csv.deps', function(data_dependencies) {
-            d3.text('../misc/dependencies.csv.files', function(data_files) {
+        d3.text('../scripts/matlab_in/dependencies.csv.deps', function(data_dependencies) {
+            d3.text('../scripts/misc/dependencies.csv.files', function(data_files) {
                 var dependencies = [];
                 var fileNames = [];
 
