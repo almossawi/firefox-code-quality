@@ -53,7 +53,7 @@
     function drawCharts(module) {
         if(module == undefined) { module = 'all'; }
 
-        d3.csv('metrics_out/full_metrics-' + module + '.csv', function(data) {
+        d3.csv('scripts/metrics_out/full_metrics-' + module + '.csv', function(data) {
             data = MG.convert.date(data, 'date', '%Y-%m-%dT%H:%M:%SZ');
             data.map(function(d) {
                  d.mccabe = d.SumCyclomatic / d.CountLineCode * 1000;

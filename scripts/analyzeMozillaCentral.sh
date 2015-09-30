@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/Desktop/matlab_scripts_firefox_nightly
+#cd ~/Desktop/matlab_scripts_firefox_nightly
 
 #get latest source, we can pass in dont_pull to use existing codebase instead of pulling latest
 if [ "$1" != "dont_pull" ]
