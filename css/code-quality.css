@@ -130,3 +130,8 @@ ul.switch li.no-padding {
 .pill:hover {
     text-decoration: none;
 }
+
+.mg-x-axis text,
+.mg-y-axis text {
+    font-size: 0.8rem;
+}

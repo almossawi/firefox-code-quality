@@ -1,2 +1,2 @@
 data_file,files,first_order_density,prop_cost,core_size,periphery_size,shared_size,control_size,vfo_median,vfi_median,jons_vfo_threshold,jons_vfi_threshold,maxvfo_by_two,maxvfi_by_two,vfo_right_on_cutoff_jons,vfi_right_on_cutoff_jons
-matlab_in/dependencies.csv.deps,545,0.0057571,0.045643,112,184,81,156,5,9,4,3,
+matlab_in/dependencies.csv.deps,14019,0.00070628,0.25815,4218,3763,433,2755,5075,9399,19,3,
