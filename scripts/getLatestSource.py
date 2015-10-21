@@ -11,7 +11,7 @@ outFilePath = 'understand_in/mozilla-central-latest.tar'
 folder = 'understand_in'
 
 # get new source
-response = urllib2.urlopen(baseURL + filename)
+response = urllib2.urlopen(baseURL + filename, timeout=300)
 compressedFile = StringIO.StringIO()
 compressedFile.write(response.read())
 

@@ -4,7 +4,7 @@
     var global = {
         trunk: {
             width: 360,
-            height: 200,
+            height: 220,
             left: 0,
             right: 60,
             xax_count: 4
