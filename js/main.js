@@ -21,7 +21,7 @@
 
     var markers = [{
         'date': new Date('2015-10-20T00:00:00.000Z'),
-        'label': "Static analysis, new build"
+        'label': "Updated static analyzer"
     }];
 
     d3.text('scripts/data/modules.txt', function(data) {
