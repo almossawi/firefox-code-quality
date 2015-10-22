@@ -59,6 +59,10 @@
         if(module == undefined) { module = 'all'; }
 
         d3.csv('scripts/metrics_out/full_metrics-' + module + '.csv', function(data) {
+            data = data.filter(function(d) {
+                return d.date !== '';
+            });
+
             data = MG.convert.date(data, 'date', '%Y-%m-%dT%H:%M:%SZ');
             data.map(function(d) {
                  d.mccabe = d.SumCyclomatic / d.CountLineCode * 1000;

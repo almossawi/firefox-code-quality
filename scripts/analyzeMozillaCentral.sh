@@ -61,3 +61,7 @@ done < 'data/modules.txt'
 
 #analyze codebase (no param = entire codebase)
 analyzeModule
+
+#since this runs as a crontab...
+chmod -R 0755 misc
+chmod -R 0755 matlab_in
