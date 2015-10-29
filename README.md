@@ -29,9 +29,9 @@ The script then goes through the above steps for each of the modules in ``data/m
 
 ### Dependencies endpoint
 
-To get the set of files that depend on some arbitrary file in the latest revision (fan-in) or the files that that file depends on (fan-out), you can call the following endpoint, with a ``filename`` argument and an optional ``download`` argument:
+To get the set of files that depend on some arbitrary file in the latest revision (fan-in) or the files that that file depends on (fan-out), you can call the following endpoint--the URL is temporary and will change once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1219410) is resolved:
 
-``https://metrics.mozilla.com/code-quality/dep/?filename=xpcom/glue/nsINIParser.cpp&download=false``
+``http://almossawi.com:3003/deps/filename=xpcom:glue:nsINIParser.cpp``
 
 The response is a JSON object like this:
 
@@ -66,8 +66,6 @@ If a filename cannot be found, the resulting JSON object will look like this:
   error: 'File name missing or does not exist in the codebase, usage: https://metrics.mozilla.com/code-quality/dep/?filename=xpcom/glue/nsINIParser.cpp'
 }
 ```
-
-Once [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1196279) is resolved, the endpoint will respond with the proper content type and there will be no need for the ``download`` argument. That server doesn't currently have node installed.
 
 
 ### Requirements
