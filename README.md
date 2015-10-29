@@ -17,7 +17,7 @@ scripts/analyzeMozillaCentral.sh
 * ``getLatestSource.py``: contains the path to the codebase that we'll be analyzing
 
 ### How the script works
-The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to complete. It performs the following tasks:
+The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to complete and runs twice a day. It performs the following tasks:
 
 1. Pulls the latest revision from mozilla-central (``getLatestSource.py``)
 2. Performs static analysis on the codebase to get LOC, cyclomatic complexity and dependency data (``projectMetrics.pl``)
