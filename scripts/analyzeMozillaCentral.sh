@@ -32,19 +32,20 @@ analyzeModule() {
 
   #get loc, mccabe and export dependencies
   und create -db $DB_NAME -languages c++ Web add -exclude ".*,*test*" $REVISION'/'$MOD
+  und settings -FileTypes .jsm=Javascript -db $DB_NAME
   echo $REVISION'/'$MOD
   und analyze -db $DB_NAME
   uperl projectMetrics.pl -db $DB_NAME > metrics_out/loc_mccabe_metrics.csv
-  und export -dependencies file csv perl_in/dependencies.csv -db $DB_NAME
+  und export -dependencies file csv process_in/dependencies.csv -db $DB_NAME
 
   #process dependencies
-  ./extractFilesAndDeps.pl perl_in/dependencies.csv
+  python extractFilesAndDeps.py process_in/dependencies.csv
 
   #cleanup
   rm -rf misc/dependencies.csv.files
   rm -rf matlab_in/dependencies.csv.deps
-  mv perl_in/dependencies.csv.files misc
-  mv perl_in/dependencies.csv.deps matlab_in
+  mv process_in/dependencies.csv.files misc
+  mv process_in/dependencies.csv.deps matlab_in
 
   #get architectural metrics
   matlab -nodesktop -r main_metrics_generator
