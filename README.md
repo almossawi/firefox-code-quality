@@ -21,11 +21,11 @@ The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to comp
 
 1. Pulls the latest revision from mozilla-central (``getLatestSource.py``)
 2. Performs static analysis on the codebase to get LOC, cyclomatic complexity and dependency data (``projectMetrics.pl``)
-3. Generates a hash table from the dependency data (``extractFilesAndDeps.pl``)
+3. Generates a hash table from the dependency data (``extractFilesAndDeps.py``)
 4. Gets dependencies, propagation cost and highly-interconnected files data (``main_metrics_generator.m``)
 5. Writes the entire set of data to be graphed to ``metrics_out/full_metrics-all.csv`` (``addToFullMetrics.py``)
 
-The script then goes through the above steps for each of the modules in ``data/modules.txt``.
+The script then goes through the above steps for each of the modules in ``data/modules.txt``. The Python replacement for the script in (2) requires Python 3, which we don't currently have in production.
 
 ### Dependencies endpoint
 
