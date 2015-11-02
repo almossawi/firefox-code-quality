@@ -25,7 +25,7 @@ The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to comp
 4. Gets dependencies, propagation cost and highly-interconnected files data (``main_metrics_generator.m``)
 5. Writes the entire set of data to be graphed to ``metrics_out/full_metrics-all.csv`` (``addToFullMetrics.py``)
 
-The script then goes through the above steps for each of the modules in ``data/modules.txt``. There is a Perl alternative to (2) that you might wish to use. Once the script terminates, the respective directories under ``scripts`` will be populated, allowing you to both view the data in the dashboard at ``index.html`` and make use of the dependencies endpoint.
+The script then goes through the above steps for each of the modules in ``data/modules.txt``. Once the script terminates, the respective directories under ``scripts`` will be populated, allowing you to both view the data in the dashboard at ``index.html`` and make use of the dependencies endpoint.
 
 ### Dependencies endpoint
 
