@@ -8,7 +8,7 @@ filenamesHash = {}
 if len(sys.argv) > 1:
     iFile = sys.argv[1] 
 else:
-    print "Usage: " + sys.argv[0] + " <inputFile>\n"
+    print("Usage: ", sys.argv[0], " <inputFile>\n")
     sys.exit()
 
 def dedup(seq):
@@ -19,9 +19,9 @@ def dedup(seq):
 fFile = iFile + ".files"
 dFile = iFile + ".deps"
 
-print "Input file:         " + iFile
-print "Filenames file:     " + fFile
-print "Dependency file:    " + dFile
+print("Input file:         ", iFile)
+print("Filenames file:     ", fFile)
+print("Dependency file:    ", dFile)
 
 # get filenames from the dependencies file from Understand and 
 INFILE = [line.rstrip('\n') for line in open(iFile)]

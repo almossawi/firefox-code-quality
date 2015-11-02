@@ -1,29 +1,14 @@
 import os
 import tarfile
-import urllib2
-import StringIO
-import gzip
-import shutil
+import urllib.request
 
-baseURL = 'https://hg.mozilla.org/mozilla-central/archive/'
-filename = 'tip.tar.gz'
-outFilePath = 'understand_in/mozilla-central-latest.tar'
-folder = 'understand_in'
+url = 'https://hg.mozilla.org/mozilla-central/archive/tip.tar.gz'
+outFilePath = 'understand_in'
 
 # get new source
-response = urllib2.urlopen(baseURL + filename, timeout=300)
-compressedFile = StringIO.StringIO()
-compressedFile.write(response.read())
+urllib.request.urlretrieve(url, outFilePath + '/tip.tar.gz')
 
-compressedFile.seek(0)
-
-decompressedFile = gzip.GzipFile(fileobj=compressedFile, mode='rb')
-
-with open(outFilePath, 'w') as outfile:
-    outfile.write(decompressedFile.read())
-
-tar = tarfile.open(outFilePath)
-tar.extractall('understand_in')
+tar = tarfile.open(outFilePath + '/tip.tar.gz', 'r:gz')
+tar.extractall(outFilePath)
 tar.close()
-
-os.remove(outFilePath)
+os.remove(outFilePath + '/tip.tar.gz')

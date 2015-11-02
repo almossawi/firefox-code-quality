@@ -35,7 +35,8 @@ analyzeModule() {
   und settings -FileTypes .jsm=Javascript -db $DB_NAME
   echo $REVISION'/'$MOD
   und analyze -db $DB_NAME
-  uperl projectMetrics.pl -db $DB_NAME > metrics_out/loc_mccabe_metrics.csv
+  #uperl projectMetrics.pl -db $DB_NAME > metrics_out/loc_mccabe_metrics.csv
+  projectMetrics.py $DB_NAME > metrics_out/loc_mccabe_metrics.csv
   und export -dependencies file csv process_in/dependencies.csv -db $DB_NAME
 
   #process dependencies
