@@ -20,12 +20,12 @@ scripts/analyzeMozillaCentral.sh
 The script (``analyzeMozillaCentral.sh``) takes approximately 30 minutes to complete and runs twice a day. It performs the following tasks:
 
 1. Pulls the latest revision from mozilla-central (``getLatestSource.py``)
-2. Performs static analysis on the codebase to get LOC, cyclomatic complexity and dependency data (``projectMetrics.pl``)
+2. Performs static analysis on the codebase to get LOC, cyclomatic complexity and dependency data (``projectMetrics.py``)
 3. Generates a hash table from the dependency data (``extractFilesAndDeps.py``)
 4. Gets dependencies, propagation cost and highly-interconnected files data (``main_metrics_generator.m``)
 5. Writes the entire set of data to be graphed to ``metrics_out/full_metrics-all.csv`` (``addToFullMetrics.py``)
 
-The script then goes through the above steps for each of the modules in ``data/modules.txt``. The Python replacement for the script in (2) requires Python 3, which we don't currently have in production.
+The script then goes through the above steps for each of the modules in ``data/modules.txt``. There is a Perl alternative to (2) that you might wish to use. Once the script terminates, the respective directories under ``scripts`` will be populated, allowing you to both view the data in the dashboard at ``index.html`` and make use of the dependencies endpoint.
 
 ### Dependencies endpoint
 
@@ -72,8 +72,7 @@ If a filename cannot be found, the resulting JSON object will look like this:
 
 * Scitools' Understand
 * MATLAB (to be replaced by Python)
-* Perl (to be replaced by Python)
-* Python
+* Python 3
 
 ### Demo
 [https://metrics.mozilla.com/code-quality](https://metrics.mozilla.com/code-quality)
