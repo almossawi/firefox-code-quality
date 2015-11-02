@@ -6,5 +6,3 @@ scripts/matlab_in/*
 scripts/misc/*
 scripts/metrics_out/*
 deps/node_modules/*
-
-*.csv
