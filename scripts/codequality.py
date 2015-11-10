@@ -1,6 +1,6 @@
 import numpy as np
-import statistics
 from scipy import sparse
+import statistics
 
 def metrics(data_file):
   output_str = ''
