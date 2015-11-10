@@ -94,19 +94,6 @@ def metrics(data_file):
   return output_str
 
 
-# credit https://gist.github.com/kevinavery/9613505
-def loadDsm(filename):
-  DATA = np.loadtxt(filename, delimiter=',')
-  dims = DATA.shape[1] - 1
-  shape = [np.max(DATA[:,i]) for i in range(dims)]
-  M = np.zeros(shape=shape)
-  for row in DATA:
-    index = tuple(row[:-1] - 1)
-    M.itemset(index, row[-1])
-
-  return M
-
-
 def raiseAllPowers(initial_matrix, max_paths):
   initial_matrix = sparse.csr_matrix(initial_matrix)
   initial_matrix.data.fill(1)
@@ -152,3 +139,16 @@ def getFiFo(dsmProp):
   FI = FI.transpose()
   
   return [FI, FO]
+
+
+# credit https://gist.github.com/kevinavery/9613505
+def loadDsm(filename):
+  DATA = np.loadtxt(filename, delimiter=',')
+  dims = DATA.shape[1] - 1
+  shape = [np.max(DATA[:,i]) for i in range(dims)]
+  M = np.zeros(shape=shape)
+  for row in DATA:
+    index = tuple(row[:-1] - 1)
+    M.itemset(index, row[-1])
+
+  return M
