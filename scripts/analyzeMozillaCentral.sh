@@ -49,7 +49,8 @@ analyzeModule() {
   mv process_in/dependencies.csv.deps matlab_in
 
   #get architectural metrics
-  matlab -nodesktop -r main_metrics_generator
+  #matlab -nodesktop -r main_metrics_generator
+  python3 generateDepMetrics.py
 
   #add date and revision number to full_metrics.csv and then data from the other two metrics_out files
   python addToFullMetrics.py $MOD
