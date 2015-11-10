@@ -12,7 +12,7 @@ with open('metrics_out/dependency_metrics.csv', 'w') as fid:
     if file.endswith(".deps"):
         file_list.append(file)
 
-  fid.write('data_file,files,first_order_density,prop_cost,core_size,periphery_size,shared_size,control_size,vfo_median,vfi_median,jons_vfo_threshold,jons_vfi_threshold\n')
+  fid.write('data_file,files,first_order_density,prop_cost,core_size,periphery_size,shared_size,control_size,vfo_median,vfi_median,fo_median,fi_median\n')
 
   # get all metrics from those files
   for i, current_data_file in enumerate(file_list):

@@ -14,13 +14,13 @@ def metrics(data_file):
   # calculate the visibility matrices for all path lengths
   dsms = raiseAllPowers(dsm_initial, -1)
 
-  # the data file name
+  # data file name
   output_str = output_str + data_file + ','
 
   # the final visibility matrix
   dsm_visibility = dsms[len(dsms) - 1]
 
-  # display number of files
+  # number of files
   output_str = output_str + str(len(dsm_initial)) + ','
 
   # now, get the fan-in and fan-out data and calculate the density and propagation cost
@@ -57,8 +57,8 @@ def metrics(data_file):
   shared_size = 0 		# low vfo, high vfi
 
   for i, val in enumerate(vfi):
-    # base on visibility matrix rather than first-order matrix, otherwise, 
-    # we'd use fi, fo, vfi_median and vfo_median
+    # base the cutoff points on the visibility matrix rather than first-order matrix
+    # otherwise, we'd use fi, fo, fi_median and fo_median
     if vfi[i] >= vfi_median and vfo[i] >= vfo_median:
       core_size += 1
     elif vfi[i] < vfi_median and vfo[i] < vfo_median:
@@ -79,8 +79,8 @@ def metrics(data_file):
   print('peripheral: ', peripheral_size)
   print('shared: ', shared_size)
   print('control: ', control_size)
-  print('vfi_mode: ', vfi_mode)
-  print('vfo_mode ', vfo_mode)
+  print('vfi mode: ', vfi_mode)
+  print('vfo mode ', vfo_mode)
 
   output_str = output_str + str(core_size) + ','
   output_str = output_str + str(peripheral_size) + ','
@@ -90,7 +90,7 @@ def metrics(data_file):
   output_str = output_str + str(vfi_median) + ','
   output_str = output_str + str(fo_median) + ','
   output_str = output_str + str(fi_median)
-    
+
   return output_str
 
 
@@ -119,17 +119,17 @@ def raiseAllPowers(initial_matrix, max_paths):
     # sponify the matrix, so that we converge
     matrix_squared.data.fill(1)
 
-    # how many nnz elements    
+    # nnz elements    
     print(len(matrix_squared.nonzero()[0]), len(matrices[current_path_length].nonzero()[0]))
 
-    # if the squared matrix is the same as the last one, we're done
+    # when we've achieved the transitive closure of our matrix, we're done
     if len(matrix_squared.nonzero()[0]) == len(matrices[current_path_length].nonzero()[0]):
       done = 1
       continue
     else:
       matrices.append(matrix_squared)
       current_path_length += 1
-      
+
   return matrices
 
 
@@ -137,7 +137,7 @@ def getFiFo(dsmProp):
   FI = dsmProp.sum(axis=0) # sum over columns
   FO = dsmProp.sum(axis=1) # sum over rows
   FI = FI.transpose()
-  
+
   return [FI, FO]
 
 
