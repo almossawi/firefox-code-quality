@@ -52,7 +52,7 @@ def metrics(data_file):
   fi_median = statistics.median(arr_fi)
 
   control_size = 0 		# high vfo, low vfi
-  core_size = 0 			# high vfo, high vfi
+  core_size = 0 		# high vfo, high vfi
   peripheral_size = 0 	# low vfo, low vfi
   shared_size = 0 		# low vfo, high vfi
 
