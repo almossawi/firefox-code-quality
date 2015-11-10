@@ -70,8 +70,8 @@ If a filename cannot be found, the resulting JSON object will look like this:
 
 ### Requirements
 
-* Scitools' Understand
-* Python 3 (dependencies: NumPy, SciPy)
+* [Scitools' Understand](http://scitools.com)
+* [Python 3](https://www.python.org/) (dependencies: [NumPy](http://www.numpy.org), [SciPy](http://www.scipy.org/))
  
 
 ### Demo
